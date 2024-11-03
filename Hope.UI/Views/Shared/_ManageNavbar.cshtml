@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Hope.Infrastructure.DTO.NavbarPermissionDTO;
+<div>
+    <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item active">
+            <a href="~/Home/Index" class="menu-link">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAJVJREFUSEvtVTEOgCAQu/uY0cHvMNw/IJH3mKgv02DC4ACUS0AHWSmUNu3B1Hhx4/upL4F3biOiMaFqNyJT2FusPZh5KOHC/kOBd+7MWWZEbjyK+wmSbkYrP21RLm2rEZmjPFWKasrZnQCSri4aKl1dtOYE6CxSK0APorhPFw2auq8ogHpQCEN6VKAxrcH1/ZNrXoZiL2zuiBl7AFyqAAAAAElFTkSuQmCC" />
+                <div>Dashboard</div>
+            </a>
+        </li>
+
+        @if(Model != null)
+        {
+            @if(Model.User == "true")
+            {
+                
+           
+
+        <li class="menu-item ">
+            <a href="~/User/GetAllUsers" class="menu-link">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAU5JREFUSEvtlT1LA0EQht9pRART6T/QXqysbUI6FRFbS4tcuOHs11a5OW/F4ipLsRA/sAr4GySCP8MUFwJGoyuJGPDuch8eaSTb7sz7zL4zyxAmfGjC+pgCMh1OtEhrvWj6fSGgNlAg4P4dYGZuZypGAmKAIAjmet1uC8BSJPa5HYarSqm3IpAYwBfZJeAiScQAGw3m28GdFjFpIIt5qB0DaJEDAEdjkh2L2S0H8LwtGHOVBCCizbpt35Sy6Fyp2U6l8gRgOSLUmg/DtT2lXksBhs//nqITMqYGok8D3H0ATnSK0vowtgdFqvsTQHveNozZB7AegT0Y4KzBfF2kiF9TdOq6x4bISRMgIlW37cO8kBHAF9kh4DJnYtVibqaNa6wHvsgjASs5AU2LuVoIoEV6AGZyAl4s5oU8sSOLsr5+VOzHgizIdOFkOfQPdvIX+jh5GU13vOAAAAAASUVORK5CYII=" />
+                <div>Users</div>
+            </a>
+        </li>
+            }
+
+            @if (Model.Medicine == "true")
+            {
+                <li class="menu-item">
+                    <a href="~/Medicine/GetAllMedicines" class="menu-link ">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAihJREFUSEvNlb2LE0EYh3+/PTF6IY2gzfVyhdpYqb0ewpWmPUWOgLIbd9b4dQSDxA80M+vunoUfINppZyFWWngWEjsRK0v/ghMi4t29ZuACSUyyu2DAKXdmnmfmfd95l5jy4JT5+D8FTxuNXT9KpTMg94L8Lhsb7Wqt9mVUNHLfINJakWwAKPUBtwisuErdGZbkEiTGXBHgtoWIyHsHaAtwEORxACR52fX9u/2SzIIkDOsicgPATxFZrAbB2x4oarUO03HWAOycAebPK/WtN5dJkIThLRG5CuA3yQXX998NhyLSeoVkEyJLXhA8zyyIw1BDRAHYJLno+v6bUclMtD4l5EsATU+peiZBHIYhRC5sL/5cKBaPVCqVzihBbMwjAMsCnK4q9SxVEBnzgMC5IdhaoVhcGJZExpQJvLC3TM2BAEyMeWhPM/KVkx8Ks7MnepJI65MkX3VDswPAJU+pexOrqL8Ux7aRbcmvTucoRF7b6gHw2FWqQkDGCpJWa14c56ut6dQeJfIJ5AEAuwHEnlLV1Jcca70M0iYrz1j1lHLHbRg4aWzMTQDXctC1p9TFSesHBIkxZwV4kkVAkZYbBLW0tQOCVa33b5E2BzMpG+ueUs00uJ3/K5mxMTZENlQjh5C1qu+3ssBHCuzHyJglAqZbHXv6QOvdFnrdC4L7WeFjBXbC/lTWS6VjDnmo2+A+7puba5fL5c088ImCvKBMZfqvoGNf8jQEfwBkR7UZC+s44gAAAABJRU5ErkJggg==" />
+                <div>Medicines</div>
+
+            </a>
+            </li>
+            }
+            @if (Model.Store == "true")
+            {
+        <li class="menu-item">
+            <a href="~/Store/GetAllStores" class="menu-link ">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAdZJREFUSEvFlb9qFFEUxr9zdwpNE0hhmkRREQWLYIIvYZPeN9AlM+uZBVkQG1EUkjPsn84XsE3jI8QiBGQLLfKHFRJIipBOCTL3yF1nl5llzM5OXJ1qOPee87vnu9+ZIUz5oSnXxxCgAHWi6IWqVgHMlwSfqGo7CMPXg/whoCkiBDwrWTiTpqqvgjB86YJDQEvkBMA1WHvfr9e/DDJaIurefeaMnHnx1sbGEog+K3AUMC+MAgoXcolFwekOpg6wTrI1ZkNAHzbJSd1eZ5S2iKujPrPJSNQW2VfgljVmqVardd1iZ339hjWm1yd53qLv+4cXxqNo2aruANjzme+M3kHT3SWATzHR44q1s0T0RoFHSTOb1pjnJo6v5MW9OFZL9AHAAwWigJkzABGZ84DTHJt+T9x2dWTtx29VMDOa452fzz1tNM4ygLTeAHaTYdu2xlRNHM/AmPdQXUmKbVljnqjqz4pqB8BDAMcA+rKkLT3W25MMXp51/z+gKbJKwFsA99LdEPDVqtaDMPx4kaXHdtAScdrmfvwIOFhjvn1ZQOEJL3UHRb85f5r6IhL91Q6+Abg+iTVz9vZ85puDeKaDxDHvANwtCemqaiPtrH/3Ty554rFpU+/gF/PLHSj/dGEkAAAAAElFTkSuQmCC" />
+                <div>Stores</div>
+
+            </a>
+            </li>
+            }
+        }
+    </ul>
+</div>

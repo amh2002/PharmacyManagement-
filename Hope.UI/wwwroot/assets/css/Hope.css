@@ -1,0 +1,11 @@
+﻿
+.hope-menu {
+    padding: 10px;
+    position: relative;
+    min-width:11rem;
+    text-decoration:none;
+}
+    .hope-menu:hover {
+        color: black;
+        position: relative;
+    }

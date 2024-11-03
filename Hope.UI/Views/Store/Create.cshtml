@@ -1,0 +1,231 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Hope.Infrastructure.DTO.StoreDTO
+<html>
+<head>
+     <!-- Bootstrap Bundle with Popper.js -->
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Content -->
+                    
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <h4 class="fw-bold py-3 mb-4">Create New Store</h4>
+             <form action="AddNewStore" >
+            <div class="card">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Supplier Name
+                                    <span class="text-danger">*</span>
+                                    <select class="form-select" asp-for="SupplierId" asp-items="@(new SelectList(ViewBag.Supplier,"SupplierId","SupplierName"))">
+                                        <option value="" selected="selected">Please Select</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-4">
+                                    Medicine Name
+                                    <span class="text-danger">*</span>
+                                    <select class="form-select" asp-for="MedicineId" asp-items="@(new SelectList(ViewBag.Medicine,"MedicineId","MedicineName"))">
+                                        <option value="" selected="selected">Please Select</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    Original QTY
+                                    <span class="text-danger">*</span>
+                                    <input type="number" asp-for="OrginalQty" class="form-control" />
+                                    <span asp-validation-for="OrginalQty" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-12"> 
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Remaning QTY
+                                
+                                <span class="text-danger">*</span>
+                                <input type="number" asp-for="RemaningQty" class="form-control" />
+                                <span asp-validation-for="RemaningQty" class="text-danger"></span>
+
+                            </div>
+                            <div class="col-md-4">
+                                Cost Price
+                                <span class="text-danger">*</span>
+                                        <input type="number" id="txtCostPrice" asp-for="CostPrice" class="form-control" />
+                                <span asp-validation-for="CostPrice" class="text-danger"></span>
+
+                            </div>
+                            <div class="col-md-4">
+                                Tax Value
+                                <span class="text-danger">*</span>
+                                        <input type="number" id="txtTaxValue" asp-for="TaxValue" onchange="CalculateTax();" class="form-control" />
+                                <span asp-validation-for="TaxValue" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Selling Price Before Tax
+                                
+                                <span class="text-danger">*</span>
+                                        <input id="txtSellingPriceBeforeTax" type="number" readonly="readonly" asp-for="SellingPriceBeforeTax" class="form-control" />
+                                <span asp-validation-for="SellingPriceBeforeTax" class="text-danger"></span>
+
+                            </div>
+                            <div class="col-md-4">
+                                Selling Price After Tax
+                                <span class="text-danger">*</span>
+                                        <input id="txtSellingPriceAfterTax" type="number" readonly="readonly" asp-for="SellingPriceAfterTax" class="form-control" />
+                                <span asp-validation-for="SellingPriceAfterTax" class="text-danger"></span>
+
+                            </div>
+                            <div class="col-md-4">
+                                Max Discount
+                                <span class="text-danger">*</span>
+                                <input type="number" asp-for="MaxDiscount" class="form-control" />
+                                <span asp-validation-for="MaxDiscount" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                Production Date
+                                <span class="text-danger">*</span>
+                                <input type="date" id="txtProductionDate" asp-for="ProductionDate" class="form-control" />
+                                <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                Expiry Date
+                                <span class="text-danger">*</span>
+                                <input type="date" id="txtExpiryDate" asp-for="ExpiryDate" class="form-control" />
+                                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row" id="divError" style="margin-left:5px;display:none">
+                <div class="col-md-8 alert alert-danger">
+                    Expiry Date should be greater than Production Date
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-dark" onclick="return CheckDate();"> Save </button>
+
+                </div>
+            </div>
+            <div class="row"> <br /></div>
+
+            </div>
+            </form>
+            </div>
+            
+
+    </div>
+   
+
+    <script type="text/javascript">
+
+        function CalculateTax() {
+            // Get the values from the input fields and remove extra spaces
+            var taxValue = parseFloat(document.getElementById('txtTaxValue').value.trim());
+            var costPrice = parseFloat(document.getElementById('txtCostPrice').value.trim());
+            console.log(taxValue, costPrice);  // This will print the values in the browser's console
+
+            // Check if the inputs are valid numbers
+            if (isNaN(taxValue) || isNaN(costPrice)) {
+                alert("Please enter valid numbers for tax and cost price.");
+                return;
+            }
+
+            // Set the selling price before tax
+            document.getElementById('txtSellingPriceBeforeTax').value = costPrice;
+
+            // Calculate the tax amount
+            var taxAmount = (taxValue / 100) * costPrice;
+
+            // Set the selling price after tax
+            document.getElementById('txtSellingPriceAfterTax').value = (costPrice + taxAmount).toFixed(2);
+        }
+
+        function CheckDate() {
+                const ProductionDate = document.getElementById('txtProductionDate').value;
+                const ExpiryDate = document.getElementById('txtExpiryDate').value;
+
+                
+                 if (ProductionDate > ExpiryDate) {
+                document.getElementById('divError').style.display = 'block';
+                return false;
+              }
+               else {
+                 document.getElementById('divError').style.display = 'none';
+                return true;
+              }
+        }
+
+
+    </script>
+
+    <!-- Bootstrap Bundle with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+</html>
+
+
+
+
+
